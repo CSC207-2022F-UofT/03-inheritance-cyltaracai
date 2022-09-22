@@ -26,7 +26,42 @@
  *       The toString method should be overridden to return a string in the
  *       in the same form as Bag's toString but with the original "Bag" part
  *       of the string replaced by:
+ *
  *           Crossbody Bag with {numberOfStraps} straps
  *
  *       See the tests in test/CrossBodyBagTest.java for examples.
  */
+public class CrossbodyBag extends Bag{
+    // attribute
+    private int numberOfStraps;
+
+    /**
+     * Creates a new HandBag with the given color and
+     * capacity.
+     *
+     * @param color
+     * @param capacity
+     */
+    public CrossbodyBag(String color, int capacity, int num_strap) {
+        /**
+         * This is how we call the parent's constructor
+         * The Python equivalent is super().__init__(...)
+         */
+        super(color, capacity);
+        this.numberOfStraps = num_strap;
+    }
+
+    public int getNumberOfStraps(){
+        return this.numberOfStraps;
+    }
+    @Override
+    public void enhance() {
+        super.increaseCapacity(2);
+    }
+
+    @Override
+    public String toString(){
+        return super.getColor() + " Crossbody Bag with " + this.numberOfStraps + " straps (" + super.getNumberOfContents() + " / " +
+                super.getCapacity() + ")";
+    }
+}

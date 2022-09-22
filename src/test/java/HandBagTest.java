@@ -38,11 +38,26 @@ public class HandBagTest {
     }
 
     @Test(timeout = 50)
+    public void testGetNumberOfContentsFull() {
+        b.addItem("Cheese");
+        b.addItem("Eggs");
+        b.addItem("Milk");
+        b.addItem("Strawberry");
+        assertEquals(4, b.getNumberOfContents());
+        b.addItem("Apple");
+        assertEquals(4, b.getNumberOfContents());
+        assertEquals("Strawberry", b.popItem());
+    }
+
+    @Test(timeout = 50)
     public void testGetNumberOfContentsPop() {
         b.addItem("Cheese");
         b.addItem("Eggs");
         assertEquals("Eggs", b.popItem());
         assertEquals(1, b.getNumberOfContents());
+        assertEquals("Cheese", b.popItem());
+        assertEquals(0, b.getNumberOfContents());
+        assertEquals(null, b.popItem());
     }
 
     @Test(timeout = 50)
@@ -58,14 +73,35 @@ public class HandBagTest {
 
     @Test(timeout = 50)
     public void TestIncreaseCapacity() {
+        b.addItem("Cheese");
+        b.addItem("Eggs");
         b.increaseCapacity(2);
         assertEquals(6, b.getCapacity());
+        assertEquals("Eggs", b.popItem());
+        assertEquals("Cheese", b.popItem());
+        assertEquals(null, b.popItem());
+        b.addItem("Cheese");
+        b.addItem("Eggs");
+        b.addItem("Milk");
+        b.addItem("Strawberry");
+        b.addItem("Apple");
+        b.addItem("Juice");
+        assertEquals(6, b.getNumberOfContents());
+        assertEquals(false, b.addItem("Tomato"));
     }
 
     @Test(timeout = 50)
     public void TestEnhance() {
         b.enhance();
         assertEquals(5, b.getCapacity());
+        b.addItem("Cheese");
+        b.addItem("Eggs");
+        b.addItem("Milk");
+        b.addItem("Strawberry");
+        b.addItem("Apple");
+        assertEquals("Apple", b.popItem());
+        b.addItem("Apple");
+        assertEquals(false,  b.addItem("Juice"));
     }
 
 }
